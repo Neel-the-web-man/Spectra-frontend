@@ -5,9 +5,12 @@ const Home = () => {
     const [SearchInput, setSearchInput] = useState("");
     ws.onmessage = (msg) => {
         const data = JSON.parse(msg.data);
-        console.log(data);
-        
-    }
+        if (data.t == "autocreply") {
+            // show suggestions under search bar
+            console.log(data.data); 
+            // TODO: returns other languages also, filter based on language
+        }
+    };
     const handleSearch = async (e) => {
         setSearchInput(e.target.value);
         ws.send(JSON.stringify({ t: "autoc", data: e.target.value }));
