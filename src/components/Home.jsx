@@ -3,17 +3,42 @@ import { useState } from "react";
 const Home = () => {
     const ws = new WebSocket("ws://localhost:8000");
     const [SearchInput, setSearchInput] = useState("");
+    const [suggestions, setSuggestions] = useState([]);
+    const suggBox = document.querySelector("#sugg-box");
     ws.onmessage = (msg) => {
         const data = JSON.parse(msg.data);
+
         if (data.t == "autocreply") {
             // show suggestions under search bar
-            console.log(data.data); 
+            setSuggestions(data.data);
+            let htmld = "";
+            data.data.forEach((s) => {
+                htmld += `<div class="sugg"><img src=${
+                    s.poster || "thumb.webp"
+                } alt="poster" /><span>${s.title}</span></div>`;
+            });
+            // if (SearchInput.length > 1) {
+                suggBox.innerHTML = htmld;
+                console.log(data.data);
+                
+            // }
             // TODO: returns other languages also, filter based on language
         }
     };
     const handleSearch = async (e) => {
         setSearchInput(e.target.value);
-        ws.send(JSON.stringify({ t: "autoc", data: e.target.value }));
+        if (SearchInput.length) {
+            console.log(SearchInput);
+            ws.send(JSON.stringify({ t: "autoc", data: SearchInput }));
+        }
+        // else {
+        //     suggBox.innerHTML = "";
+        //     setSuggestions([]);
+        // }
+        // if (SearchInput.length <= 1) {
+        //     suggBox.innerHTML = "";
+        //     setSuggestions([]);
+        // }
     };
     return (
         <div className="home-body">
@@ -21,10 +46,11 @@ const Home = () => {
                 <input
                     type="text"
                     placeholder="Enter"
-                    onChange={handleSearch}
+                    onInput={handleSearch}
                     value={SearchInput}
                 />
                 <button>Search</button>
+                <div id="sugg-box"></div>
             </div>
             <div className="movies-topic-heading">Action - Thriller</div>
             <div className="movies-cont">
