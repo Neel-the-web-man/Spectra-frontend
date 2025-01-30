@@ -2,44 +2,62 @@ import "./Home.css";
 import { useState } from "react";
 const Home = () => {
     const ws = new WebSocket("ws://localhost:8000");
-    const [SearchInput, setSearchInput] = useState("");
-    const [suggestions, setSuggestions] = useState([]);
-    const suggBox = document.querySelector("#sugg-box");
+    const [searchInput, setSearchInput] = useState("");
+    const [children, setChildren] = useState([]);
+    const [suggBoxVisible, setSuggBoxVisible] = useState(false);
+    const [overlayState, setOverlayState] = useState(false);
+
     ws.onmessage = (msg) => {
         const data = JSON.parse(msg.data);
 
         if (data.t == "autocreply") {
+            console.log("reply");
+
             // show suggestions under search bar
-            setSuggestions(data.data);
-            let htmld = "";
-            data.data.forEach((s) => {
-                htmld += `<div class="sugg"><img src=${
-                    s.poster || "thumb.webp"
-                } alt="poster" /><span>${s.title}</span></div>`;
-            });
-            // if (SearchInput.length > 1) {
-                suggBox.innerHTML = htmld;
-                console.log(data.data);
-                
-            // }
+            if (searchInput.length) {
+                const childArr = [];
+                data.data.forEach((s) => {
+                    childArr.push(
+                        <a className="sugg">
+                            <img src={s.poster || "thumb.webp"} alt="poster" />
+                            <span>{s.title}</span>
+                        </a>
+                    );
+                });
+                setChildren(childArr);
+            }
+
             // TODO: returns other languages also, filter based on language
         }
     };
-    const handleSearch = async (e) => {
-        setSearchInput(e.target.value);
-        if (SearchInput.length) {
-            console.log(SearchInput);
-            ws.send(JSON.stringify({ t: "autoc", data: SearchInput }));
+    const handleSearch = (e) => {
+        const currQuery = e.target.value;
+        setSearchInput(currQuery);
+
+        if (currQuery.length) {
+            ws.send(JSON.stringify({ t: "autoc", data: currQuery }));
+            console.log(currQuery, "sent");
+        } else {
+            setOverlayState(false);
+            setChildren([]);
+            setSearchInput("");
         }
-        // else {
-        //     suggBox.innerHTML = "";
-        //     setSuggestions([]);
-        // }
-        // if (SearchInput.length <= 1) {
-        //     suggBox.innerHTML = "";
-        //     setSuggestions([]);
-        // }
     };
+
+    const handleInputBlur = () => {
+        setSuggBoxVisible(false);
+        setOverlayState(false);
+    };
+
+    const handleInputFocus = () => {
+        setSuggBoxVisible(true);
+        setOverlayState(true);
+    };
+
+    const handleSearchClick = () => {
+        children[0].click();
+    };
+
     return (
         <div className="home-body">
             <div className="search-box">
@@ -47,11 +65,22 @@ const Home = () => {
                     type="text"
                     placeholder="Enter"
                     onInput={handleSearch}
-                    value={SearchInput}
+                    value={searchInput}
+                    onBlur={handleInputBlur}
+                    onFocus={handleInputFocus}
                 />
-                <button>Search</button>
-                <div id="sugg-box"></div>
+                <button onClick={handleSearchClick}>Search</button>
+                <div
+                    id="sugg-box"
+                    style={{ display: suggBoxVisible ? "initial" : "none" }}
+                >
+                    {children}
+                </div>
             </div>
+            <div
+                className="overlay"
+                style={{ display: overlayState ? "initial" : "none" }}
+            ></div>
             <div className="movies-topic-heading">Action - Thriller</div>
             <div className="movies-cont">
                 <div className="movie-box">

@@ -5,11 +5,11 @@
 .home-body{
     background-color: rgba(3, 3, 3, 0.8);
     width: 100%;
-    /* height: 2000px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 .search-box {
     display: grid;
@@ -17,6 +17,7 @@
     place-items: center;
     margin-top: 40px;
     position: relative;
+    z-index: 10;
 }
 
 .search-box input{
@@ -64,6 +65,8 @@
 }
 
 .sugg {
+    text-decoration: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
     padding: 4px 5px;
@@ -74,6 +77,15 @@
     height: 40px;
     object-fit: cover;
     margin-right: 10px;
+}
+
+.overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff4c;
+    z-index: 5;
+    display: none;
 }
 
 
