@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import "./Home.css";
 import { useState } from "react";
 
-const ws = new WebSocket("ws://localhost:8000");
+const ws = new WebSocket("ws://localhost:8001");
 
 const Home = () => {
     const [searchInput, setSearchInput] = useState("");
