@@ -20,6 +20,10 @@
     z-index: 10;
 }
 
+.input-sugg-box {
+    width: 100%;
+}
+
 .search-box input{
     padding: 5px;
     border-radius: 5px;
@@ -52,7 +56,7 @@
 }
 
 
-#sugg-box {
+.sugg-box {
     position: absolute;
     transform: translate(0, 100%);
     bottom: 0;
@@ -65,13 +69,17 @@
 }
 
 .sugg {
-    text-decoration: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     padding: 4px 5px;
     border: 1px solid;
 }
+
+.sugg:hover {
+    background-color: #00000047;
+}
+
 .sugg > img {
     width: 35px;
     height: 40px;

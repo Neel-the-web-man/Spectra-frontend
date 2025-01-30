@@ -1,14 +1,20 @@
+import { useNavigate } from "react-router";
 import "./Home.css";
 import { useState } from "react";
+
+const ws = new WebSocket("ws://localhost:8000");
+
 const Home = () => {
-    const ws = new WebSocket("ws://localhost:8000");
     const [searchInput, setSearchInput] = useState("");
+    const [waiting, setWaiting] = useState(false);
     const [children, setChildren] = useState([]);
     const [suggBoxVisible, setSuggBoxVisible] = useState(false);
     const [overlayState, setOverlayState] = useState(false);
+    const navigate = useNavigate();
 
     ws.onmessage = (msg) => {
         const data = JSON.parse(msg.data);
+        console.log(data);
 
         if (data.t == "autocreply") {
             console.log("reply");
@@ -17,19 +23,33 @@ const Home = () => {
             if (searchInput.length) {
                 const childArr = [];
                 data.data.forEach((s) => {
+                    // console.log(s);
+
                     childArr.push(
-                        <a className="sugg">
+                        <div
+                            onClick={() => gotomov(s._id)}
+                            id={s._id}
+                            className="sugg"
+                        >
                             <img src={s.poster || "thumb.webp"} alt="poster" />
                             <span>{s.title}</span>
-                        </a>
+                        </div>
                     );
                 });
                 setChildren(childArr);
             }
 
             // TODO: returns other languages also, filter based on language
+        } else if (data.t == "inforeply" && data.data) {
+            if (waiting) {
+                const dt = data.data;
+                navigate(`/movie/${dt._id}`, { state: data.data });
+                console.log("redirected", waiting);
+                setWaiting(false);
+            }
         }
     };
+
     const handleSearch = (e) => {
         const currQuery = e.target.value;
         setSearchInput(currQuery);
@@ -45,8 +65,10 @@ const Home = () => {
     };
 
     const handleInputBlur = () => {
-        setSuggBoxVisible(false);
-        setOverlayState(false);
+        setTimeout(() => {
+            setSuggBoxVisible(false);
+            setOverlayState(false);
+        }, 250);
     };
 
     const handleInputFocus = () => {
@@ -55,27 +77,38 @@ const Home = () => {
     };
 
     const handleSearchClick = () => {
-        children[0].click();
+        suggBoxVisible && children && gotomov(children[0].props.id);
+    };
+
+    const gotomov = (id) => {
+        ws.send(JSON.stringify({ t: "info", data: id }));
+        setWaiting(true);
+        console.log("redirecting", id);
     };
 
     return (
         <div className="home-body">
             <div className="search-box">
-                <input
-                    type="text"
-                    placeholder="Enter"
-                    onInput={handleSearch}
-                    value={searchInput}
-                    onBlur={handleInputBlur}
-                    onFocus={handleInputFocus}
-                />
-                <button onClick={handleSearchClick}>Search</button>
                 <div
-                    id="sugg-box"
-                    style={{ display: suggBoxVisible ? "initial" : "none" }}
+                    className="input-sugg-box"
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
                 >
-                    {children}
+                    <input
+                        type="text"
+                        placeholder="Enter"
+                        onInput={handleSearch}
+                        value={searchInput}
+                    />
+
+                    <div
+                        className="sugg-box"
+                        style={{ display: suggBoxVisible ? "initial" : "none" }}
+                    >
+                        {children}
+                    </div>
                 </div>
+                <button onClick={handleSearchClick}>Search</button>
             </div>
             <div
                 className="overlay"
