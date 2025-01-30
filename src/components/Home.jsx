@@ -13,15 +13,14 @@ const Home = () => {
             setSuggestions(data.data);
             let htmld = "";
             data.data.forEach((s) => {
-                htmld += `<div class="sugg"><img src=${
-                    s.poster || "thumb.webp"
-                } alt="poster" /><span>${s.title}</span></div>`;
+                htmld += `<div class="sugg"><img src=${s.poster || "thumb.webp"
+                    } alt="poster" /><span>${s.title}</span></div>`;
             });
-            // if (SearchInput.length > 1) {
+            if (SearchInput.length > 1) {
                 suggBox.innerHTML = htmld;
                 console.log(data.data);
-                
-            // }
+
+            } else suggBox.innerHTML = ''
             // TODO: returns other languages also, filter based on language
         }
     };
@@ -41,6 +40,7 @@ const Home = () => {
         // }
     };
     return (
+        <>
         <div className="home-body">
             <div className="search-box">
                 <input
@@ -48,7 +48,7 @@ const Home = () => {
                     placeholder="Enter"
                     onInput={handleSearch}
                     value={SearchInput}
-                />
+                    />
                 <button>Search</button>
                 <div id="sugg-box"></div>
             </div>
@@ -177,6 +177,7 @@ const Home = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 
