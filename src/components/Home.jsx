@@ -1,57 +1,120 @@
+import { useNavigate } from "react-router";
 import "./Home.css";
 import { useState } from "react";
+
+const ws = new WebSocket("ws://localhost:8000");
+
 const Home = () => {
-    const ws = new WebSocket("ws://localhost:8000");
-    const [SearchInput, setSearchInput] = useState("");
-    const [suggestions, setSuggestions] = useState([]);
-    const suggBox = document.querySelector("#sugg-box");
+    const [searchInput, setSearchInput] = useState("");
+    const [waiting, setWaiting] = useState(false);
+    const [children, setChildren] = useState([]);
+    const [suggBoxVisible, setSuggBoxVisible] = useState(false);
+    const [overlayState, setOverlayState] = useState(false);
+    const navigate = useNavigate();
+
     ws.onmessage = (msg) => {
         const data = JSON.parse(msg.data);
+        console.log(data);
 
         if (data.t == "autocreply") {
-            // show suggestions under search bar
-            setSuggestions(data.data);
-            let htmld = "";
-            data.data.forEach((s) => {
-                htmld += `<div class="sugg"><img src=${s.poster || "thumb.webp"
-                    } alt="poster" /><span>${s.title}</span></div>`;
-            });
-            if (SearchInput.length > 1) {
-                suggBox.innerHTML = htmld;
-                console.log(data.data);
+            console.log("reply");
 
-            } else suggBox.innerHTML = ''
+            // show suggestions under search bar
+            if (searchInput.length) {
+                const childArr = [];
+                data.data.forEach((s) => {
+                    // console.log(s);
+
+                    childArr.push(
+                        <div
+                            onClick={() => gotomov(s._id)}
+                            id={s._id}
+                            className="sugg"
+                        >
+                            <img src={s.poster || "thumb.webp"} alt="poster" />
+                            <span>{s.title}</span>
+                        </div>
+                    );
+                });
+                setChildren(childArr);
+            }
+
             // TODO: returns other languages also, filter based on language
+        } else if (data.t == "inforeply" && data.data) {
+            if (waiting) {
+                const dt = data.data;
+                navigate(`/movie/${dt._id}`, { state: data.data });
+                console.log("redirected", waiting);
+                setWaiting(false);
+            }
         }
     };
-    const handleSearch = async (e) => {
-        setSearchInput(e.target.value);
-        if (SearchInput.length) {
-            console.log(SearchInput);
-            ws.send(JSON.stringify({ t: "autoc", data: SearchInput }));
+
+    const handleSearch = (e) => {
+        const currQuery = e.target.value;
+        setSearchInput(currQuery);
+
+        if (currQuery.length) {
+            ws.send(JSON.stringify({ t: "autoc", data: currQuery }));
+            console.log(currQuery, "sent");
+        } else {
+            setOverlayState(false);
+            setChildren([]);
+            setSearchInput("");
         }
-        // else {
-        //     suggBox.innerHTML = "";
-        //     setSuggestions([]);
-        // }
-        // if (SearchInput.length <= 1) {
-        //     suggBox.innerHTML = "";
-        //     setSuggestions([]);
-        // }
     };
+
+    const handleInputBlur = () => {
+        setTimeout(() => {
+            setSuggBoxVisible(false);
+            setOverlayState(false);
+        }, 250);
+    };
+
+    const handleInputFocus = () => {
+        setSuggBoxVisible(true);
+        setOverlayState(true);
+    };
+
+    const handleSearchClick = () => {
+        suggBoxVisible && children && gotomov(children[0].props.id);
+    };
+
+    const gotomov = (id) => {
+        ws.send(JSON.stringify({ t: "info", data: id }));
+        setWaiting(true);
+        console.log("redirecting", id);
+    };
+
     return (
         <>
         <div className="home-body">
             <div className="search-box">
-                <input
-                    type="text"
-                    placeholder="Enter"
-                    onInput={handleSearch}
-                    value={SearchInput}
+                <div
+                    className="input-sugg-box"
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
+                >
+                    <input
+                        type="text"
+                        placeholder="Enter"
+                        onInput={handleSearch}
+                        value={searchInput}
                     />
-                <button>Search</button>
-                <div id="sugg-box"></div>
+
+                    <div
+                        className="sugg-box"
+                        style={{ display: suggBoxVisible ? "initial" : "none" }}
+                    >
+                        {children}
+                    </div>
+                </div>
+                <button onClick={handleSearchClick}>Search</button>
             </div>
+            <div
+                className="overlay"
+                style={{ display: overlayState ? "initial" : "none" }}
+            ></div>
             <div className="movies-topic-heading">Action - Thriller</div>
             <div className="movies-cont">
                 <div className="movie-box">
