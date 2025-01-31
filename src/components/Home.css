@@ -1,141 +1,141 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .home-body {
-    background-color: rgba(3, 3, 3, 0.8);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  background-color: rgba(3, 3, 3, 0.8);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 .search-box {
-    display: grid;
-    grid-template-columns: 500px 100px;
-    place-items: center;
-    margin-top: 40px;
-    position: relative;
-    z-index: 10;
+  display: grid;
+  grid-template-columns: 500px 100px;
+  place-items: center;
+  margin-top: 40px;
+  position: relative;
+  z-index: 10;
 }
 
 .input-sugg-box {
-    width: 100%;
+  width: 100%;
 }
 
 .search-box input {
-    padding: 5px;
-    border-radius: 5px;
-    outline: none;
-    padding-top: 15px;
-    padding-bottom: 10px;
-    width: 100%;
-    border: 1px solid black;
-    font-size: 18px;
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  width: 100%;
+  border: 1px solid black;
+  font-size: 18px;
 }
 .search-box input::placeholder {
-    color: gray;
-    font-size: 18px;
+  color: gray;
+  font-size: 18px;
 }
 .search-box button {
-    margin-left: 15px;
-    height: 49px;
-    width: min-content;
-    border-radius: 5px;
-    background-color: rgba(246, 35, 35, 0.882);
-    padding: 0px 15px;
-    font-size: 18px;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: all 0.5s;
+  margin-left: 15px;
+  height: 49px;
+  width: min-content;
+  border-radius: 5px;
+  background-color: rgba(246, 35, 35, 0.882);
+  padding: 0px 15px;
+  font-size: 18px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s;
 }
 .search-box button:hover {
-    box-shadow: inset 200px 0 0 0 rgba(255, 0, 0, 0.627);
+  box-shadow: inset 200px 0 0 0 rgba(255, 0, 0, 0.627);
 }
 
 .sugg-box {
-    position: absolute;
-    transform: translate(0, 100%);
-    bottom: 0;
-    left: 0;
-    background-color: white;
-    border: 1px solid;
-    border-radius: 3px;
-    width: 500px;
-    /* padding: 4px 5px; */
+  position: absolute;
+  transform: translate(0, 100%);
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  border: 1px solid;
+  border-radius: 3px;
+  width: 500px;
+  /* padding: 4px 5px; */
 }
 
 .sugg {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 4px 5px;
-    border: 1px solid;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px 5px;
+  border: 1px solid;
 }
 
 .sugg:hover {
-    background-color: #00000047;
+  background-color: #00000047;
 }
 
 .sugg > img {
-    width: 35px;
-    height: 40px;
-    object-fit: cover;
-    margin-right: 10px;
+  width: 35px;
+  height: 40px;
+  object-fit: cover;
+  margin-right: 10px;
 }
 
 .overlay {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: #ffffff4c;
-    z-index: 5;
-    display: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff4c;
+  z-index: 5;
+  display: none;
 }
 
 .movies-topic-heading {
-    margin-top: 30px;
-    color: white;
-    font-size: 23px;
-    display: flex;
-    justify-content: center;
+  margin-top: 30px;
+  color: white;
+  font-size: 23px;
+  display: flex;
+  justify-content: center;
 }
 .movies-cont {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    color: white;
-    justify-content: center;
-    margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  color: white;
+  justify-content: center;
+  margin-top: 30px;
 }
 .movie-box {
-    background-color: rgba(8, 8, 8, 0.405);
-    height: 300px;
-    width: 300px;
-    border-radius: 7px;
-    cursor: pointer;
-    transition: all 0.5s ease;
+  background-color: rgba(8, 8, 8, 0.405);
+  height: 300px;
+  width: 300px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.5s ease;
 }
 .movie-box:hover {
-    transform: scale(1.07);
+  transform: scale(1.07);
 }
 .movie-thumbnail {
-    height: 200px;
-    width: 100%;
-    background-image: url("https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-fall-waterfall-free-image.jpeg?w=600&quality=80");
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-    background-position: center center;
+  height: 200px;
+  width: 100%;
+  background-image: url("https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-fall-waterfall-free-image.jpeg?w=600&quality=80");
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  background-position: center center;
 }
 .movie-subcont {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
 }
 .movie-name {
-    font-size: 18px;
+  font-size: 18px;
 }

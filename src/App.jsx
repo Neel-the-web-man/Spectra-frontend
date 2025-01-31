@@ -15,65 +15,65 @@ import Movinfo from "./components/movinfo.jsx";
 // export const ws = new WebSocket("ws://localhost:8000");
 
 function App() {
-    const { isAuthenticated } = useAuth();
-    return (
-        <>
-            <Navbar />
-            <Routes>
-                {isAuthenticated ? (
-                    <Route
-                        path={"/Login"}
-                        element={<Navigate to="/" replace />}
-                    />
-                ) : (
-                    <Route path={"/Login"} element={<Login />} />
-                )}
-                {isAuthenticated ? (
-                    <Route
-                        path={"/SignUp"}
-                        element={<Navigate to="/" replace />}
-                    />
-                ) : (
-                    <Route path={"/SignUp"} element={<Signin />} />
-                )}
-                <Route
-                    path="/"
-                    element={
-                        <ProtectedRoute>
-                            {" "}
-                            <Home />
-                        </ProtectedRoute>
-                    }
-                />
-                <Route
-                    path="/About"
-                    element={
-                        <ProtectedRoute>
-                            {" "}
-                            <About />
-                        </ProtectedRoute>
-                    }
-                />
-                <Route
-                    path="/Team"
-                    element={
-                        <ProtectedRoute>
-                            {" "}
-                            <Team />
-                        </ProtectedRoute>
-                    }
-                />
-                <Route
-                    path="/movie/:id"
-                    element={
-                        <ProtectedRoute>
-                            <Movinfo />
-                        </ProtectedRoute>
-                    }
-                />
-            </Routes>
-        </>
-    );
+  const { isAuthenticated } = useAuth();
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        {isAuthenticated
+          ? (
+            <Route
+              path={"/Login"}
+              element={<Navigate to="/" replace />}
+            />
+          )
+          : <Route path={"/Login"} element={<Login />} />}
+        {isAuthenticated
+          ? (
+            <Route
+              path={"/SignUp"}
+              element={<Navigate to="/" replace />}
+            />
+          )
+          : <Route path={"/SignUp"} element={<Signin />} />}
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              {" "}
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/About"
+          element={
+            <ProtectedRoute>
+              {" "}
+              <About />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Team"
+          element={
+            <ProtectedRoute>
+              {" "}
+              <Team />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/movie/:id"
+          element={
+            <ProtectedRoute>
+              <Movinfo />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </>
+  );
 }
 
 export default App;
