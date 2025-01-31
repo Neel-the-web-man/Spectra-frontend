@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import "./Navbar.css"
 import { Link } from "react-router"
 import { useAuth } from '../contexts/authContext.jsx';
@@ -5,15 +6,15 @@ import axios from "axios";
 const Navbar = () => {
   const { isAuthenticated,logout} = useAuth();
   const handleLogout=async()=>{
-    console.log("logout");
+    // console.log("logout");
     try {
         const response = await axios.post(`/users/logout`);
         localStorage.removeItem("accessToken");
-        console.log(response);
+        // console.log(response);
         logout();
       } catch (error) {
         localStorage.removeItem("accessToken");
-        console.log("Error in logging out: ", error);
+        // console.log("Error in logging out: ", error);
         logout();
     }
   }

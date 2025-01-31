@@ -12,7 +12,7 @@ const Team = () => {
         </div>
         <div className="card">
             <div className="team-img">
-              <img src="" alt="img" />
+              <img src="https://i.postimg.cc/7bvVPpL9/rishi-img.jpg" alt="img" />
             </div>
             <div className="team-name">Rishi Vishwakarma</div>
         </div>

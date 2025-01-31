@@ -31,15 +31,15 @@ const Login = () => {
       const user=response?.data?.data?.user;
       localStorage.setItem("accessToken",accessToken);
       login(accessToken,user);
-      toast.success("Succefully Logged In");
-      setTimeout(() => navigate("/"), 1000);
       setFormData({
         username:"",
         password:""
       })
+      toast.success("Succefully Logged In");
+      setTimeout(() => navigate("/",{ replace: true }), 2000);
       
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setFormData({
         username:"",
         password:""
@@ -48,42 +48,6 @@ const Login = () => {
     }
     setLoading(false);
   };
-  
-  // // Check token expiration and logout if expired
-  // useEffect(() => {
-  //   const checkTokenExpiration = async () => {
-      
-  //     try {
-  //     const response=await axios.get(`http://localhost:8000/users/getCurrentUser`);
-  //     console.log(response);
-  //     //user is logged in
-  //   } catch (error) {
-  //     console.log(error);
-  //     if(error.status==401){
-  //       navigate("/Login");
-  //       //dont allow user to access site until he logs in
-  //     }else if(error.status==402){
-  //       try {
-  //         const response=await axios.post(`http://localhost:8000/users/refreshAcessToken`);
-  //         console.log(response);
-  //         //user is logged in
-  //       } catch (error) {
-  //         //user must login since he dont have any refresh token or its expired or used 
-  //         console.log(error);
-  //         if(error.status==401){
-  //           navigate("/Login")
-  //         }
-  //       }
-  //       }
-  //     }
-
-  //   };
-
-  //   // Check token expiration every 10 minute
-  //   const interval = setInterval(checkTokenExpiration, 150000);
-  //   return () => clearInterval(interval);
-  // }, [navigate]);
-
   return (
     <div className="login-body">
       <ToastContainer 
@@ -110,7 +74,7 @@ const Login = () => {
             <input type="text" placeholder="password" required name="password" value={formData.password} onChange={handleChange}/>
             </div>
             <button type="submit" className="loginformsubmit">Submit</button>
-            <p>Haven&apos;t Signed Up?... <Link to='/Signup'>SignUp</Link></p>
+            <p className="login-nav-signup">Haven&apos;t Signed Up?... <Link to='/Signup'>SignUp</Link></p>
         </form>
       </div>
     </div>

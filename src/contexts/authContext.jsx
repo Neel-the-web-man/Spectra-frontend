@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 import { createContext, useState, useEffect } from 'react';
@@ -15,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const checkAuth = async () => {
             const accessToken = localStorage.getItem('accessToken');
-            console.log(accessToken);
+            // console.log(accessToken);
             if (accessToken) {
                 try {
                     const response = await axios.get('/users/current-user'); 
@@ -23,31 +24,39 @@ export const AuthProvider = ({ children }) => {
                       setIsAuthenticated(true);
                       setUser(response.data.data.user); 
                       //setuser properly
-                      console.log("HI user: ",response);
+                      // console.log("HI user: ",response);
                       return <Navigate to="/" replace />; // Redirect to login
                     } else {
                       localStorage.removeItem('accessToken');
+                      setIsAuthenticated(false);
+                      setUser(null);
                     }
                   } catch (error) {
-                    console.log("Get current user error: ",error);
+                    // console.log("Get current user error: ",error);
                     //401-token hai but expired hai refreshToken call laga
                     if(error.status==401){
                       try {
-                        console.log("Trying to refresh token");
+                        // console.log("Trying to refresh token");
                         const response = await axios.post('/users/refresh-token'); 
-                        console.log("Refreshed Access Token: ",response);
+                        // console.log("Refreshed Access Token: ",response);
                         //store accessToken in localStorage here
                         localStorage.setItem('accessToken', response.data.data.accessToken);
                         return <Navigate to="/" replace />; // Redirect to login
                     } catch (error) {
                       //agar refresh token pe error ara hai toh login pe bhej
-                      console.log("Error in refresh Token: ",error);
+                      // console.log("Error in refresh Token: ",error);
                       setIsAuthenticated(false);
                       return <Navigate to="/login" replace />;
                     }
                   }
-                    localStorage.removeItem('accessToken');
+                  localStorage.removeItem('accessToken');
                 }
+              }else{
+                localStorage.removeItem('accessToken');
+                setIsAuthenticated(false);
+                setUser(null);
+                return <Navigate to="/login" replace />;
+
             }
             setLoading(false);
         };

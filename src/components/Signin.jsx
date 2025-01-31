@@ -4,14 +4,15 @@ import { useState } from "react";
 import "./Signin.css"
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios"
-
+import axios from "axios" 
+import { useNavigate } from "react-router";
 const Signin = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,15 +28,34 @@ const Signin = () => {
     setLoading(true);
     try {
       const response=await axios.post(`http://localhost:8000/users/register`, formData);
-      // console.log(response);
-      toast.success("Form has been submitted");
+      // console.log("Registered ",response);
+      toast.success("User Registered Successfully");
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+      })
+      setLoading(false);
+      setTimeout(() => {
+      navigate("/login", { replace: true });
+      }, 2000);
     } catch (error) {
       if(error.status==409){
         toast.error("User already exists");
+        setFormData({
+          username: "",
+          email: "",
+          password: "",
+        })
         return;
       }
       toast.error("Error in submitting form");
     }
+    setFormData({
+      username: "",
+      email: "",
+      password: "",
+    })
     setLoading(false);
   };
 
