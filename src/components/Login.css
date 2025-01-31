@@ -1,12 +1,13 @@
-.login-body{
+.login-body {
     background-color: rgba(3, 3, 3, 0.8);
     width: 100%;
     display: flex;
     height: 100vh;
     justify-content: center;
 }
-.login-cont{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.login-cont {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
     margin-top: 50px;
     border: 2px solid white;
     display: flex;
@@ -24,14 +25,14 @@
     flex-direction: column;
     gap: 20px;
 }
-.login-form-div{
+.login-form-div {
     font-size: 18px;
     display: flex;
     gap: 10px;
     align-items: center;
     justify-content: space-between;
 }
-.login-form-div input{
+.login-form-div input {
     padding: 5px;
     font-size: 16px;
     border: none;
@@ -39,7 +40,7 @@
     outline: none;
     font-family: inherit;
 }
-.loginformsubmit{
+.loginformsubmit {
     width: 100px;
     font-family: inherit;
     border-radius: 5px;
@@ -50,8 +51,8 @@
     border: none;
     cursor: pointer;
     transition: all 0.5s;
-    margin: 0  auto;
+    margin: 0 auto;
 }
-.loginformsubmit:hover{
+.loginformsubmit:hover {
     box-shadow: inset 200px 0 0 0 rgba(255, 0, 0, 0.627);
 }

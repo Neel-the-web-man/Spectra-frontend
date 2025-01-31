@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-.home-body{
+.home-body {
     background-color: rgba(3, 3, 3, 0.8);
     width: 100%;
     display: flex;
@@ -24,7 +24,7 @@
     width: 100%;
 }
 
-.search-box input{
+.search-box input {
     padding: 5px;
     border-radius: 5px;
     outline: none;
@@ -34,11 +34,11 @@
     border: 1px solid black;
     font-size: 18px;
 }
-.search-box input::placeholder{
+.search-box input::placeholder {
     color: gray;
     font-size: 18px;
 }
-.search-box button{
+.search-box button {
     margin-left: 15px;
     height: 49px;
     width: min-content;
@@ -51,10 +51,9 @@
     cursor: pointer;
     transition: all 0.5s;
 }
-.search-box button:hover{
+.search-box button:hover {
     box-shadow: inset 200px 0 0 0 rgba(255, 0, 0, 0.627);
 }
-
 
 .sugg-box {
     position: absolute;
@@ -96,16 +95,14 @@
     display: none;
 }
 
-
-
-.movies-topic-heading{
+.movies-topic-heading {
     margin-top: 30px;
     color: white;
     font-size: 23px;
     display: flex;
     justify-content: center;
 }
-.movies-cont{
+.movies-cont {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
@@ -113,7 +110,7 @@
     justify-content: center;
     margin-top: 30px;
 }
-.movie-box{
+.movie-box {
     background-color: rgba(8, 8, 8, 0.405);
     height: 300px;
     width: 300px;
@@ -121,10 +118,10 @@
     cursor: pointer;
     transition: all 0.5s ease;
 }
-.movie-box:hover{
+.movie-box:hover {
     transform: scale(1.07);
 }
-.movie-thumbnail{
+.movie-thumbnail {
     height: 200px;
     width: 100%;
     background-image: url("https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-fall-waterfall-free-image.jpeg?w=600&quality=80");
@@ -132,13 +129,13 @@
     border-top-right-radius: 7px;
     background-position: center center;
 }
-.movie-subcont{
+.movie-subcont {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     height: 100px;
 }
-.movie-name{
+.movie-name {
     font-size: 18px;
 }

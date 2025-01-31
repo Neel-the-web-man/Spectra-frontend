@@ -41,7 +41,7 @@
 }
 
 .left:hover .img-overlay {
-    opacity: 1; 
+    opacity: 1;
 }
 
 .play-box {
@@ -72,7 +72,6 @@
 .inf {
     margin: 2rem 0;
 }
-
 
 .list {
     margin: 10px;
