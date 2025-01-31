@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { Navigate } from 'react-router-dom';
-import { useAuth } from './contexts/authContext.jsx';
+import { Navigate } from "react-router-dom";
+import { useAuth } from "./contexts/authContext.jsx";
 
 const ProtectedRoute = ({ children }) => {
     const { isAuthenticated, loading } = useAuth();

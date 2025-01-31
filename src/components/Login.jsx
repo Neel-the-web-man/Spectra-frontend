@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios"
-import "./Login.css"
-import {Link, useNavigate} from "react-router-dom"
-import {useAuth} from "../contexts/authContext.jsx" 
+import axios from "axios";
+import "./Login.css";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/authContext.jsx";
 const Login = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -81,4 +81,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Login;

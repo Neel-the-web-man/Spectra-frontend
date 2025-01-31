@@ -24,7 +24,8 @@ const Movinfo = () => {
                 </div>
                 <div className="right">
                     <div className="inf">
-                        <span className="hl">Genres:</span> <ul className="list">
+                        <span className="hl">Genres:</span>{" "}
+                        <ul className="list">
                             {movie.genres.map((item, index) => (
                                 <li key={index}>{item}</li>
                             ))}
@@ -32,7 +33,7 @@ const Movinfo = () => {
                     </div>
                     <div className="inf">
                         <span className="hl">Languages:</span>
-                         <ul className="list">
+                        <ul className="list">
                             {movie.languages.map((item, index) => (
                                 <li key={index}>{item}</li>
                             ))}

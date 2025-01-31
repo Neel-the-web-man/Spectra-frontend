@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import "./Home.css";
 import { useState } from "react";
 
-const ws = new WebSocket("ws://localhost:8000");
+const ws = new WebSocket("ws://localhost:8001");
 
 const Home = () => {
     const [searchInput, setSearchInput] = useState("");
@@ -88,158 +88,162 @@ const Home = () => {
 
     return (
         <>
-        <div className="home-body">
-            <div className="search-box">
-                <div
-                    className="input-sugg-box"
-                    onFocus={handleInputFocus}
-                    onBlur={handleInputBlur}
-                >
-                    <input
-                        type="text"
-                        placeholder="Enter"
-                        onInput={handleSearch}
-                        value={searchInput}
-                    />
-
+            <div className="home-body">
+                <div className="search-box">
                     <div
-                        className="sugg-box"
-                        style={{ display: suggBoxVisible ? "initial" : "none" }}
+                        className="input-sugg-box"
+                        onFocus={handleInputFocus}
+                        onBlur={handleInputBlur}
                     >
-                        {children}
+                        <input
+                            type="text"
+                            placeholder="Enter"
+                            onInput={handleSearch}
+                            value={searchInput}
+                        />
+
+                        <div
+                            className="sugg-box"
+                            style={{
+                                display: suggBoxVisible ? "initial" : "none",
+                            }}
+                        >
+                            {children}
+                        </div>
+                    </div>
+                    <button onClick={handleSearchClick}>Search</button>
+                </div>
+                <div
+                    className="overlay"
+                    style={{ display: overlayState ? "initial" : "none" }}
+                ></div>
+                <div className="movies-topic-heading">Action - Thriller</div>
+                <div className="movies-cont">
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
                     </div>
                 </div>
-                <button onClick={handleSearchClick}>Search</button>
+                <div className="movies-topic-heading">Romantic</div>
+                <div className="movies-cont">
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="movies-topic-heading">Horror</div>
+                <div className="movies-cont">
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="movies-topic-heading">
+                    Psycological - Thriller
+                </div>
+                <div className="movies-cont">
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                    <div className="movie-box">
+                        <div className="movie-thumbnail"></div>
+                        <div className="movie-subcont">
+                            <div className="movie-name">Dilwale</div>
+                            <div className="movie-yr"> 1995</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div
-                className="overlay"
-                style={{ display: overlayState ? "initial" : "none" }}
-            ></div>
-            <div className="movies-topic-heading">Action - Thriller</div>
-            <div className="movies-cont">
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-            </div>
-            <div className="movies-topic-heading">Romantic</div>
-            <div className="movies-cont">
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-            </div>
-            <div className="movies-topic-heading">Horror</div>
-            <div className="movies-cont">
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-            </div>
-            <div className="movies-topic-heading">Psycological - Thriller</div>
-            <div className="movies-cont">
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-                <div className="movie-box">
-                    <div className="movie-thumbnail"></div>
-                    <div className="movie-subcont">
-                        <div className="movie-name">Dilwale</div>
-                        <div className="movie-yr"> 1995</div>
-                    </div>
-                </div>
-            </div>
-        </div>
         </>
     );
 };

@@ -1,4 +1,4 @@
-import "./Team.css"
+import "./Team.css";
 const Team = () => {
   return (
     <div className="team-body">
@@ -33,4 +33,4 @@ const Team = () => {
   )
 }
 
-export default Team
+export default Team;
